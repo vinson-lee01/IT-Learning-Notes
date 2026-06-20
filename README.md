@@ -58,6 +58,53 @@
 
 ---
 
+## 📖 About This Roadmap · 关于本路线图
+
+### 🇨🇳 中文简介
+
+市面上大多数运维学习路线存在同一个问题：**只列工具名，不讲顺序、不讲深度、不讲在生产环境中怎么串联使用。**
+
+这份路线图不一样。它基于国内云厂商和大型互联网公司的实际运维经验编写，围绕三个递进阶段展开。**每个模块都标注了真实生产环境需要掌握的深度——不是教材目录。**
+
+### 🌍 English Introduction
+
+Most online learning paths share a common problem: **they list tools without explaining the order, depth, or how they connect in real production environments.**
+
+This roadmap is built differently — from hands-on experience at cloud vendors and large-scale internet companies, structured around three progressive stages. **Every module explicitly marks the depth needed in real work**, not a textbook table of contents.**
+
+<table>
+<tr align="center">
+<td width="30%" valign="top">
+<strong>Stage 1</strong><br><br>
+<b>Can work<br>independently</b><br><br>
+<i>独立胜任日常工作</i>
+</td>
+<td width="5%" valign="middle" style="font-size:24px;">
+➜
+</td>
+<td width="30%" valign="top">
+<strong>Stage 2</strong><br><br>
+<b>Can design<br>architecture</b><br><br>
+<i>能够设计系统架构</i>
+</td>
+<td width="5%" valign="middle" style="font-size:24px;">
+➜
+</td>
+<td width="30%" valign="top">
+<strong>Stage 3</strong><br><br>
+<b>Can define<br>team standards</b><br><br>
+<i>定义团队标准与规范</i>
+</td>
+</tr>
+</table>
+
+| | |
+|:---|:---|
+| **Language / 语言** | CN & EN maintained independently · 非机器翻译 · Not machine-translated |
+| **Content / 内容** | 15KB+ production notes per module · 每模块 15KB+ 生产实战笔记 |
+| **CN Focus / 中文侧重** | Aliyun / Tencent Cloud / 等保合规 Compliance / 基线扫描 Baseline / 国产化 Localization |
+| **EN Focus / 英文侧重** | AWS / GCP / SRE Book methodology / Global best practices |
+
 ---
 
 # 🇨🇳 中文版 · CN Version
@@ -107,14 +154,14 @@
 <td width="280"><strong>What You Build</strong></td>
 </tr>
 <tr><td align="center"><code>01</code></td><td><a href="./EN_Global_SRE/01_Linux_Fundamentals/"><b>Linux Fundamentals</b></a></td><td>System admin · Permissions · Processes · Kernel tuning · systemd</td><td>Manage 50+ production servers independently</td></tr>
-<tr><td align="center"><code>02</code></td><td><a href="./EN_Global_SRE/03_Shell_Automation/"><b>Shell & Automation</b></a></td><td>Bash scripting · Text processing · Cron patterns · Defensive scripts</td><td>Production-grade automation (rotation/backup/alerting)</td></tr>
-<tr><td align="center"><code>03</code></td><td><a href="./EN_Global_SRE/02_Networking/"><b>Networking</b></a></td><td>TCP/IP stack · DNS chain · Firewalls · Packet analysis</td><td>Troubleshoot latency/timeout/DNS at protocol level</td></tr>
+<tr><td align="center"><code>02</code></td><td><a href="./EN_Global_SRE/02_Networking/"><b>Networking</b></a></td><td>TCP/IP stack · DNS chain · Firewalls · Packet analysis</td><td>Troubleshoot latency/timeout/DNS at protocol level</td></tr>
+<tr><td align="center"><code>03</code></td><td><a href="./EN_Global_SRE/03_Shell_Automation/"><b>Shell & Automation</b></a></td><td>Bash scripting · Text processing · Cron patterns · Defensive scripts</td><td>Production-grade automation (rotation/backup/alerting)</td></tr>
 <tr><td align="center"><code>04</code></td><td><a href="./EN_Global_SRE/04_Container_Docker/"><b>Docker</b></a></td><td>Image optimization · Dockerfile best practices · Compose</td><td>Containerize apps with 60%+ image size reduction</td></tr>
-<tr><td align="center"><code>05</code></td><td><a href="./EN_Global_SRE/07_Web_Servers/"><b>Nginx</b></a></td><td>Reverse proxy · Load balancing · HTTPS/HTTP2 · Tuning</td><td>Web tier handling 10k+ QPS</td></tr>
-<tr><td align="center"><code>06</code></td><td><a href="./EN_Global_SRE/09_Database/"><b>MySQL</b></a></td><td>Query optimization · Replication/GTID · Backups · Slow queries</td><td>Design HA database with verified recovery</td></tr>
-<tr><td align="center"><code>07</code></td><td><a href="./EN_Global_SRE/05_Kubernetes/"><b>Kubernetes</b></a></td><td>Architecture · Pod lifecycle · Deployments · Ingress · Storage</td><td>Run stateful workloads on K8s (including DBs)</td></tr>
-<tr><td align="center"><code>08</code></td><td><a href="./EN_Global_SRE/06_CI_CD/"><b>CI/CD</b></a></td><td>Pipeline as Code · GitLab CI · Artifact mgmt · Security gates</td><td>Full automated deploy, sub-10-minute lead time</td></tr>
-<tr><td align="center"><code>09</code></td><td><a href="./EN_Global_SRE/08_Monitoring_Observability/"><b>Monitoring & Observability</b></a></td><td>Prometheus+Grafana · Metric design · Alerting · ELK</td><td>MTTD < 5 min, root cause traceable</td></tr>
+<tr><td align="center"><code>05</code></td><td><a href="./EN_Global_SRE/05_Kubernetes/"><b>Kubernetes</b></a></td><td>Architecture · Pod lifecycle · Deployments · Ingress · Storage</td><td>Run stateful workloads on K8s (including DBs)</td></tr>
+<tr><td align="center"><code>06</code></td><td><a href="./EN_Global_SRE/06_CI_CD/"><b>CI/CD</b></a></td><td>Pipeline as Code · GitLab CI · Artifact mgmt · Security gates</td><td>Full automated deploy, sub-10-minute lead time</td></tr>
+<tr><td align="center"><code>07</code></td><td><a href="./EN_Global_SRE/07_Web_Servers/"><b>Nginx</b></a></td><td>Reverse proxy · Load balancing · HTTPS/HTTP2 · Tuning</td><td>Web tier handling 10k+ QPS</td></tr>
+<tr><td align="center"><code>08</code></td><td><a href="./EN_Global_SRE/08_Monitoring_Observability/"><b>Monitoring & Observability</b></a></td><td>Prometheus+Grafana · Metric design · Alerting · ELK</td><td>MTTD < 5 min, root cause traceable</td></tr>
+<tr><td align="center"><code>09</code></td><td><a href="./EN_Global_SRE/09_Database/"><b>MySQL</b></a></td><td>Query optimization · Replication/GTID · Backups · Slow queries</td><td>Design HA database with verified recovery</td></tr>
 <tr><td align="center"><code>10</code></td><td><a href="./EN_Global_SRE/10_Cloud_Native_IaC/"><b>Cloud Native & IaC</b></a></td><td>AWS/GCP/Azure · Terraform · Ansible · Service Mesh · FinOps</td><td>Production-grade multi-cloud infrastructure</td></tr>
 <tr><td align="center"><code>11</code></td><td><a href="./EN_Global_SRE/11_SRE_Handbook/"><b>SRE Handbook</b></a></td><td><b>SLO/SLI Engineering</b> · Incident Command · Blameless Postmortem · On-call · Toil Elimination · Chaos Eng.</td><td>Establish availability targets, error budgets, blameless culture</td></tr>
 <tr><td align="center"><code>12</code></td><td><a href="./EN_Global_SRE/12_Interview_Prep/"><b>Interview Prep</b></a></td><td>Behavioral questions · System design · Tech deep-dives · Compensation</td><td>Confidently pass SRE interviews at tier-1 companies</td></tr>
@@ -160,4 +207,3 @@ Found an issue or have a great resource to share?
 [![Star this repo](https://img.shields.io/github/stars/vinson-lee01/ops-engineering-roadmap?style=social)](https://github.com/vinson-lee01/ops-engineering-roadmap/stargazers)
 
 </div>
-
