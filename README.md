@@ -12,9 +12,48 @@
 
 <br>
 
-[![🇨🇳 中文版](https://img.shields.io/badge/%F0%9F%87%A8%F0%9F%87%B3_%E4%B8%AD%E6%96%87%E7%89%88-%E8%BF%9B%E5%85%A5%E4%B8%AD%E6%96%87%E7%89%88-blue?style=for-the-badge)](./CN_Ops_Roadmap/)
+[![🇨🇳 中文版](https://img.shields.io/badge/%F0%9F%87%A8%F0%9E%B3_%E4%B8%AD%E6%96%87%E7%89%88-%E8%BF%9B%E5%85%A5%E4%B8%AD%E6%96%87%E7%89%88-blue?style=for-the-badge)](./CN_Ops_Roadmap/)
 [![🌍 English](https://img.shields.io/badge/%F0%9F%8C%8D_English-Enter_EN_Version-orange?style=for-the-badge)](./EN_Global_SRE/)
 
+</div>
+
+---
+
+## 🔥 Daily Discovery · 每日发现
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### 🇨🇳 中文精选
+
+| 项目 | Stars | 说明 |
+|------|-------|------|
+| [the-book-of-secret-knowledge](https://github.com/trimstray/the-book-of-secret-knowledge) | 229k | 安全/运维知识大全 |
+| [free-for-dev](https://github.com/ripienaar/free-for-dev) | 123k | 免费开发者资源合集 |
+| [devops-exercises](https://github.com/bregman-arie/devops-exercises) | 83k | DevOps 实战练习题 |
+| [netdata](https://github.com/netdata/netdata) | 79k | AI 驱动全栈可观测性 |
+| [awesome-scalability](https://github.com/binhnguyennus/awesome-scalability) | 72k | 大规模系统设计模式 |
+
+</td>
+<td width="50%" valign="top">
+
+### 🌍 English Picks
+
+| Project | Stars | Description |
+|---------|-------|-------------|
+| [the-book-of-secret-knowledge](https://github.com/trimstray/the-book-of-secret-knowledge) | 229k | Security & Ops knowledge base |
+| [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes) | 123k | Container orchestration |
+| [free-for-dev](https://github.com/ripienaar/free-for-dev) | 123k | Free dev resources catalog |
+| [devops-exercises](https://github.com/bregman-arie/devops-exercises) | 83k | Hands-on DevOps exercises |
+| [netdata](https://github.com/netdata/netdata) | 79k | AI-powered observability |
+
+</td>
+</tr>
+</table>
+
+<div align="center">
+<sub>Updated daily · <a href="./resources/trending_zh.md">View full CN list →</a> &nbsp;·&nbsp; <a href="./resources/trending_en.md">View full EN list →</a></sub>
 </div>
 
 ---
@@ -187,7 +226,7 @@ This roadmap is built differently — from hands-on experience at cloud vendors 
 | 📖 **Books / 书单** | Curated reading list for Ops / SRE / Cloud-native | [View →](./resources/books.md) |
 | 🌐 **Communities / 社区** | Active technical communities & forums | [View →](./resources/communities.md) |
 | 🧪 **Labs / 实验** | Free online lab environments | [View →](./resources/online-labs.md) |
-| 🔥 **Daily Discovery / 每日发现** | Curated GitHub projects worth watching | [中文 →](./resources/trending_zh.md) · [EN →](./resources/trending_en.md) |
+| 🔥 **Daily Discovery / 每日发现** | Full curated GitHub project lists | [中文 →](./resources/trending_zh.md) · [EN →](./resources/trending_en.md) |
 
 </div>
 
