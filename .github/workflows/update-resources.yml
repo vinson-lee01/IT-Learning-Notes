@@ -20,14 +20,14 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: run
+      - name: run scripts
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          python scripts/update_trending.py
+          python scripts/update_trending.py || true
           python scripts/gen_share_text.py || true
 
-      - name: commit
+      - name: commit & push
         run: |
           git config user.name "vinson-lee01"
           git config user.email "vinson-lee01@users.noreply.github.com"
