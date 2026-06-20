@@ -1,17 +1,36 @@
-# 🔥 每日发现 · Daily Discovery
+# 📊 Resources Index
 
-> 整理自 GitHub 上值得关注的运维 / DevOps / SRE 开源项目，持续更新中。
-
-## 📄 分语言版本
-
-- 🇨🇳 [中文版 · 国内热门](./trending_zh.md)
-- 🌍 [English · Global Trending](./trending_en.md)
+> 🕐 Updated: 2026-06-20 18:12 (Beijing Time)
 
 ---
 
-## 💡 如何参与
+## 🇨🇳 Chinese Community (CN)
 
-发现了好的开源项目？欢迎提 Issue 或 PR 告诉我：
+- 📄 [Full list](./trending_zh.md)
+- 🆕 New today: **20**
+- 🔥 Top pick: [trimstray/the-book-of-secret-knowledge](https://github.com/trimstray/the-book-of-secret-knowledge) ⭐22.9w
 
-- 🐛 内容问题 → [Issue](https://github.com/vinson-lee01/ops-engineering-roadmap/issues)
-- 💡 项目推荐 → [Pull Request](https://github.com/vinson-lee01/ops-engineering-roadmap/pulls)
+---
+
+## 🌍 International (EN)
+
+- 📄 [Full list](./trending_en.md)
+- 🆕 New today: **20**
+- 🔥 Top pick: [trimstray/the-book-of-secret-knowledge](https://github.com/trimstray/the-book-of-secret-knowledge) ⭐22.9w
+
+---
+
+## 📚 All Resources
+
+| File | Description |
+|------|-------------|
+| [trending_zh.md](./trending_zh.md) | 🇨🇳 CN repos (updated daily) |
+| [trending_en.md](./trending_en.md) | 🌍 EN repos (updated daily) |
+| [books.md](./books.md) | 📚 Recommended books |
+| [communities.md](./communities.md) | 💬 Communities & Forums |
+| [online-labs.md](./online-labs.md) | 🧪 Online labs & Sandboxes |
+
+---
+
+*Updated: 2026-06-20 18:12 (Beijing Time)*  
+*Maintained by [vinson-lee](https://github.com/vinson-lee01)*
