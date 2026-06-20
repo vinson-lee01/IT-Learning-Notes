@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-GitHub 仓库资源整理脚本
+GitHub Trending Repos Fetcher
+- Searches CN & EN DevOps/SRE repos daily
+- Deduplicates across runs (cache)
+- Outputs: resources/trending_zh.md + trending_en.md + trending.md
 """
 
 import urllib.request
@@ -12,39 +15,42 @@ import time
 from datetime import datetime, timezone, timedelta
 from collections import defaultdict
 
-# ══════════════════════════════════════
-# 配置
-# ══════════════════════════════════════
+# ──────────────────────────────────────────
+# Config
+# ──────────────────────────────────────────
 
 GH_TOKEN = os.environ.get("GH_TOKEN", "")
 CACHE_FILE_ZH = "resources/.cache_zh.json"
 CACHE_FILE_EN = "resources/.cache_en.json"
 
 ZH_SEARCHES = [
-    {"q": "devops linux 自动化运维",          "label": "DevOps 运维自动化"},
-    {"q": "docker kubernetes 容器 部署",      "label": "Docker 容器部署"},
-    {"q": "python 自动化运维 脚本",            "label": "Python 运维开发"},
-    {"q": "prometheus grafana 监控 告警",     "label": "监控告警"},
-    {"q": "ci/cd jenkins gitlab 流水线",      "label": "CI/CD 流水线"},
-    {"q": "kubernetes k8s 生产 实践",        "label": "K8s 生产实践"},
-    {"q": "nginx 反向代理 负载均衡",           "label": "Nginx 反向代理"},
-    {"q": "mysql redis 数据库 优化",            "label": "数据库优化"},
-    {"q": "linux shell 脚本 系统管理",          "label": "Linux Shell 脚本"},
-    {"q": "ansible terraform 基础设施",         "label": "基础设施即代码"},
+    {"q": "devops linux 自动化运维 脚本",           "label": "DevOps 运维自动化"},
+    {"q": "docker kubernetes 容器 编排 部署",       "label": "Docker 容器编排"},
+    {"q": "python 自动化运维 ansible",              "label": "Python 运维开发"},
+    {"q": "prometheus grafana 监控 告警 可视化",    "label": "监控告警"},
+    {"q": "ci/cd jenkins gitlab github-actions",    "label": "CI/CD 流水线"},
+    {"q": "kubernetes k8s ingress service 生产",    "label": "K8s 生产实践"},
+    {"q": "nginx 反向代理 负载均衡 高可用",          "label": "Nginx 反向代理"},
+    {"q": "mysql redis postgresql 数据库 优化 备份", "label": "数据库优化"},
+    {"q": "linux shell 脚本 系统管理 安全加固",       "label": "Linux Shell 脚本"},
+    {"q": "terraform ansible 基础设施 即代码 iac",   "label": "基础设施即代码"},
+    {"q": "云原生 微服务 service-mesh istio",         "label": "云原生 & Service Mesh"},
+    {"q": "sre 站点可靠性 错误预算 告警管理",          "label": "SRE 方法论"},
 ]
 
 EN_SEARCHES = [
-    {"q": "devops sre infrastructure automation",       "label": "DevOps & SRE"},
-    {"q": "docker kubernetes container orchestration",   "label": "Containers & K8s"},
-    {"q": "prometheus grafana observability",           "label": "Observability"},
-    {"q": "ci/cd pipeline github-actions gitlab",      "label": "CI/CD Pipelines"},
-    {"q": "terraform ansible iac infrastructure",        "label": "IaC & Config"},
-    {"q": "python automation cloud aws azure",          "label": "Cloud & Python"},
-    {"q": "linux administration security hardening",     "label": "Linux & Security"},
-    {"q": "mysql postgres redis database clustering",    "label": "Databases"},
-    {"q": "llm aiops machine-learning mcp agent",      "label": "AI & AIOps"},
-    {"q": "opensource self-hosted privacy tools",        "label": "Self-Hosted"},
-    {"q": "kubernetes helm service-mesh istio",        "label": "Service Mesh"},
+    {"q": "devops sre infrastructure automation platform",       "label": "DevOps & SRE"},
+    {"q": "docker kubernetes container orchestration production", "label": "Containers & K8s"},
+    {"q": "prometheus grafana observability monitoring alerting", "label": "Observability"},
+    {"q": "ci/cd pipeline github-actions gitlab-jenkins",        "label": "CI/CD Pipelines"},
+    {"q": "terraform ansible iac infrastructure provisioning",     "label": "IaC & Config"},
+    {"q": "python automation cloud aws azure gcp",               "label": "Cloud & Python"},
+    {"q": "linux administration security hardening audit",         "label": "Linux & Security"},
+    {"q": "postgres mysql redis database clustering backup",      "label": "Databases"},
+    {"q": "llm aiops machine-learning mcp agent automation",    "label": "AI & AIOps"},
+    {"q": "self-hosted privacy opensource homelab",              "label": "Self-Hosted"},
+    {"q": "kubernetes helm service-mesh istio envoy",           "label": "Service Mesh"},
+    {"q": "gitops flux argo-cd deployment automation",           "label": "GitOps"},
 ]
 
 
@@ -58,22 +64,23 @@ def api_get(url, use_token=True):
         with urllib.request.urlopen(req, timeout=15) as resp:
             return json.loads(resp.read().decode())
     except Exception as e:
-        print(f"  API error: {e}")
+        print(f"    API error: {e}")
         return {}
 
 
 def search_repos(query, label=""):
     url = ("https://api.github.com/search/repositories?" +
             urllib.parse.urlencode({
-                "q": query + " stars:>100",
+                "q": query + " stars:>50 pushed:>2024-01-01",
                 "sort": "stars",
                 "order": "desc",
                 "per_page": 30,
             }))
-    print(f"  [{label}] {query[:45]}")
+    print(f"  [{label}] {query[:50]}")
     data = api_get(url)
     items = data.get("items", [])
-    print(f"     found {len(items)}")
+    total = data.get("total_count", 0)
+    print(f"     found {len(items)} / {total} total")
     time.sleep(3)
     return items
 
@@ -117,6 +124,8 @@ def quality_score(r):
                 score += 5000
             elif days < 30:
                 score += 2000
+            elif days < 90:
+                score += 500
         except Exception:
             pass
     return score
@@ -126,33 +135,56 @@ def get_level(r):
     stars = r.get("stargazers_count", 0) or 0
     topics = r.get("topics", [])
     desc = (r.get("description") or "").lower()
-    if any(w in desc + " ".join(topics) for w in ["tutorial", "入门", "beginner", "从零", "零基础", "guide"]):
+    name = r.get("name", "").lower()
+    if any(w in desc + " " + " ".join(topics) + " " + name
+           for w in ["tutorial", "入门", "beginner", "guide", "101", "getting-started"]):
         return "Basic"
-    if stars < 5000:
+    if stars < 3000:
         return "Intermediate"
     return "Advanced"
 
 
-def get_reason(r):
+def get_badge(r):
+    stars = r.get("stargazers_count", 0) or 0
     topics = r.get("topics", [])
-    desc = (r.get("description") or "")[:60]
-    if "monitoring" in topics or "prometheus" in topics:
-        return "Production monitoring essentials"
-    if "kubernetes" in topics or "k8s" in topics or "kuber" in r.get("full_name", "").lower():
-        return "Container orchestration core tool"
-    if "ci-cd" in topics or "pipeline" in topics or "jenkins" in topics:
-        return "CI/CD pipeline tool"
-    if "docker" in topics:
-        return "Container fundamentals"
-    if "database" in topics or "mysql" in topics or "redis" in topics:
-        return "Database optimization resource"
-    if "security" in topics or "hardening" in topics:
-        return "Security hardening guide"
-    if "tutorial" in topics or "awesome" in topics or "roadmap" in topics:
-        return "Curated resource collection"
-    if "llm" in topics or "ai" in topics or "mcp" in topics:
-        return "AI/Ops emerging topic"
-    return desc or "Open source project"
+    desc = (r.get("description") or "").lower()
+    full_name = r.get("full_name", "").lower()
+    if "awesome" in topics or "awesome" in full_name or "curated" in desc:
+        return "collection"
+    if "tutorial" in topics or "tutorial" in full_name or "learn" in desc:
+        return "tutorial"
+    if "tool" in desc or "cli" in desc or r.get("topics"):
+        return "tool"
+    return "project"
+
+
+def get_reason(r, lang="zh"):
+    topics = r.get("topics", [])
+    desc = (r.get("description") or "")[:80]
+    full_name = r.get("full_name", "").lower()
+    name = r.get("name", "").lower()
+
+    if "prometheus" in full_name or "grafana" in full_name:
+        return "生产监控核心组件" if lang == "zh" else "Core monitoring component"
+    if "kubernetes" in full_name or "k8s" in full_name or "kuber" in full_name:
+        return "容器编排核心工具" if lang == "zh" else "Container orchestration"
+    if "jenkins" in full_name or "gitlab" in full_name or "github-actions" in full_name:
+        return "CI/CD 流水线工具" if lang == "zh" else "CI/CD pipeline tool"
+    if "docker" in full_name:
+        return "容器化基础工具" if lang == "zh" else "Container fundamentals"
+    if "terraform" in full_name or "ansible" in full_name:
+        return "基础设施即代码" if lang == "zh" else "Infrastructure as Code"
+    if "nginx" in full_name:
+        return "高性能反向代理" if lang == "zh" else "High-perf reverse proxy"
+    if "mysql" in full_name or "redis" in full_name or "postgres" in full_name:
+        return "数据库优化资源" if lang == "zh" else "Database optimization"
+    if "awesome" in full_name or "awesome" in name:
+        return "精选资源合集" if lang == "zh" else "Curated resource list"
+    if "tutorial" in full_name or "guide" in full_name:
+        return "系统学习教程" if lang == "zh" else "Systematic tutorial"
+    if "aiops" in full_name or "llm" in full_name or "mcp" in full_name:
+        return "AI运维新兴方向" if lang == "zh" else "AI/Ops emerging topic"
+    return desc or ("Open source project" if lang == "en" else "开源项目")
 
 
 def load_cache(path):
@@ -169,7 +201,7 @@ def save_cache(path, cache):
         json.dump(cache, f, ensure_ascii=False, indent=2)
 
 
-def run_search(searches, cache, max_new=15):
+def run_search(searches, cache, max_new=20):
     all_repos = {}
     new_repos = []
     seen_set = set(cache.get("seen", {}))
@@ -206,122 +238,150 @@ def run_search(searches, cache, max_new=15):
 def render_md(new_repos, must_see, all_repos, cache, lang="zh", searches=None):
     now = datetime.now(timezone(timedelta(hours=8)))
     is_zh = lang == "zh"
-    title = "国内优质仓库（中文社区）" if is_zh else "International Repos (English Community)"
-    col_desc = "推荐理由" if is_zh else "Reason"
-    dir_count = len(searches) if searches else "multiple"
+    title = "国内优质仓库（中文社区）" if is_zh else "International Repos (Global Community)"
+    col_desc = "推荐理由" if is_zh else "Why recommended"
+    col_updated = "最近更新" if is_zh else "Last updated"
+
+    total_seen = len(cache.get("seen", {}))
 
     lines = []
-    lines.append(f"# {'CN' if is_zh else 'EN'} Repos\n")
-    lines.append(f"> Updated: {now.strftime('%Y-%m-%d %H:%M')}\n")
-    lines.append(f"> New: **{len(new_repos)}** repos | Total: **{len(cache.get('seen', {}))}**\n")
+    lines.append(f"# {'????????' if is_zh else '🌍 International'} Trending Repos\n")
+    lines.append(f"> Updated: {now.strftime('%Y-%m-%d %H:%M')} (Beijing Time)\n")
+    lines.append(f"> 🆕 New today: **{len(new_repos)}** | 📦 Total tracked: **{total_seen}** | 🔥 Hot: **{len(must_see)}**\n")
     lines.append("\n---\n")
 
+    # Hot picks (high quality score)
     if must_see:
-        lines.append("\n## Top Picks\n")
-        lines.append("| Repo | Stars | Level | Note |\n")
-        lines.append("|------|-------|-------|------|\n")
+        lines.append("\n## 🔥 Hot Picks (100k+ quality score)\n")
+        lines.append("| Repo | ⭐ Stars | 🍴 Forks | Level | Note |\n")
+        lines.append("|------|---------|----------|-------|------|\n")
         for r in sorted(must_see, key=quality_score, reverse=True)[:8]:
             fn = r["full_name"]
             url = r["html_url"]
             stars = r.get("stargazers_count", 0) or 0
+            forks = r.get("forks_count", 0) or 0
             level = get_level(r)
-            reason = get_reason(r)
-            lines.append(f"| [{fn}]({url}) | {fmt_num(stars)} | {level} | {reason} |\n")
+            reason = get_reason(r, lang=lang)
+            lines.append(f"| [{fn}]({url}) | {fmt_num(stars)} | {fmt_num(forks)} | {level} | {reason} |\n")
         lines.append("\n")
 
-    lines.append("\n## New\n")
-    lines.append(f"| Repo | Stars | Forks | Level | {col_desc} |\n")
-    lines.append("|------|-------|-------|-------|----------|\n")
+    # New repos
+    lines.append("\n## 🆕 Newly Discovered\n")
+    lines.append(f"| Repo | ⭐ Stars | 🍴 Forks | Level | {col_desc} |\n")
+    lines.append(f"|------|---------|----------|-------|----------|\n")
     for r in new_repos:
         fn = r["full_name"]
         url = r["html_url"]
         stars = r.get("stargazers_count", 0) or 0
         forks = r.get("forks_count", 0) or 0
         level = get_level(r)
-        reason = get_reason(r)
+        reason = get_reason(r, lang=lang)
         lines.append(f"| [{fn}]({url}) | {fmt_num(stars)} | {fmt_num(forks)} | {level} | {reason} |\n")
 
-    lines.append("\n---\n\n## By Category\n")
+    # By category
+    lines.append("\n---\n\n## 📂 By Category\n")
     by_dir = defaultdict(list)
     for r in new_repos:
         by_dir[r.get("_dir", "Other")].append(r)
 
-    for d, repos in by_dir.items():
-        lines.append(f"\n### {d} ({len(repos)})\n")
+    for d, repos in sorted(by_dir.items()):
+        lines.append(f"\n### {d} ({len(repos)} new)\n")
         for r in repos:
             fn = r["full_name"]
             url = r["html_url"]
             stars = r.get("stargazers_count", 0) or 0
-            desc = (r.get("description") or "-")[:80]
-            lines.append(f"- **[{fn}]({url})** {fmt_num(stars)} - {desc}\n")
+            desc = (r.get("description") or "-")[:100]
+            lines.append(f"- **[{fn}]({url})** ⭐{fmt_num(stars)} — {desc}\n")
 
-    lines.append("\n---\n")
-    lines.append(f"\n*{now.strftime('%Y-%m-%d %H:%M')}*")
+    # Language distribution (top repos)
+    lines.append("\n---\n\n## 📊 This Week's Stats\n")
+    lang_count = defaultdict(int)
+    for r in list(all_repos.values())[:50]:
+        lang = r.get("language") or "Other"
+        lang_count[lang] += 1
+    lines.append("\n**Language distribution (top 50):**\n")
+    for lang, cnt in sorted(lang_count.items(), key=lambda x: -x[1])[:8]:
+        lines.append(f"- `{lang}`: {cnt} repos\n")
+
+    lines.append(f"\n---\n")
+    lines.append(f"\n*Updated: {now.strftime('%Y-%m-%d %H:%M')} (Beijing Time)*  \n")
+    lines.append(f"*Maintained by [vinson-lee](https://github.com/vinson-lee01)*\n")
     return "".join(lines)
 
 
 def main():
-    print("searching repos...")
+    print("🚀 Searching repos (CN + EN)...")
 
-    print("\n[CN]")
+    print("\n[CN] Chinese community repos")
+    print("-" * 50)
     cache_zh = load_cache(CACHE_FILE_ZH)
-    new_zh, must_zh, all_zh = run_search(ZH_SEARCHES, cache_zh, max_new=15)
+    new_zh, must_zh, all_zh = run_search(ZH_SEARCHES, cache_zh, max_new=20)
     md_zh = render_md(new_zh, must_zh, all_zh, cache_zh, lang="zh", searches=ZH_SEARCHES)
     out_zh = "resources/trending_zh.md"
     with open(out_zh, "w", encoding="utf-8") as f:
         f.write(md_zh)
-    print(f"  done: {out_zh}")
+    print(f"  ✅ Done: {out_zh} ({len(new_zh)} new, {len(cache_zh.get('seen', {}))} total)")
     save_cache(CACHE_FILE_ZH, cache_zh)
 
-    print("\n[EN]")
+    print("\n[EN] International community repos")
+    print("-" * 50)
     cache_en = load_cache(CACHE_FILE_EN)
-    new_en, must_en, all_en = run_search(EN_SEARCHES, cache_en, max_new=15)
+    new_en, must_en, all_en = run_search(EN_SEARCHES, cache_en, max_new=20)
     md_en = render_md(new_en, must_en, all_en, cache_en, lang="en", searches=EN_SEARCHES)
     out_en = "resources/trending_en.md"
     with open(out_en, "w", encoding="utf-8") as f:
         f.write(md_en)
-    print(f"  done: {out_en}")
+    print(f"  ✅ Done: {out_en} ({len(new_en)} new, {len(cache_en.get('seen', {}))} total)")
     save_cache(CACHE_FILE_EN, cache_en)
 
-    print("\nindex...")
+    # Index file
+    print("\n�索引...")
     now = datetime.now(timezone(timedelta(hours=8)))
     top_zh = new_zh[0] if new_zh else None
     top_en = new_en[0] if new_en else None
-    summary = f"""# Resources
 
-> Updated: {now.strftime('%Y-%m-%d %H:%M')}
+    summary = f"""# 📊 Resources Index
 
----
-
-## CN
-
-- [Full list](./trending_zh.md)
-- New: **{len(new_zh)}**
-{(f"- Top: [{top_zh['full_name']}]({top_zh['html_url']}) {fmt_num(top_zh.get('stargazers_count', 0) or 0)}") if top_zh else ""}
-
-## EN
-
-- [Full list](./trending_en.md)
-- New: **{len(new_en)}**
-{(f"- Top: [{top_en['full_name']}]({top_en['html_url']}) {fmt_num(top_en.get('stargazers_count', 0) or 0)}") if top_en else ""}
+> 🕐 Updated: {now.strftime('%Y-%m-%d %H:%M')} (Beijing Time)
 
 ---
 
-| File | Desc |
-|------|------|
-| [trending_zh.md](./trending_zh.md) | CN repos |
-| [trending_en.md](./trending_en.md) | EN repos |
-| [books.md](./books.md) | Books |
-| [communities.md](./communities.md) | Communities |
-| [online-labs.md](./online-labs.md) | Labs |
+## 🇨🇳 Chinese Community (CN)
+
+- 📄 [Full list](./trending_zh.md)
+- 🆕 New today: **{len(new_zh)}**
+{"- 🔥 Top pick: [" + top_zh['full_name'] + "](" + top_zh['html_url'] + ") ⭐" + fmt_num(top_zh.get('stargazers_count', 0) + ")" if top_zh else "- 🔥 Top pick: (none today)"}
 
 ---
 
-*{now.strftime('%Y-%m-%d %H:%M')}*
+## 🌍 International (EN)
+
+- 📄 [Full list](./trending_en.md)
+- 🆕 New today: **{len(new_en)}**
+{"- 🔥 Top pick: [" + top_en['full_name'] + "](" + top_en['html_url'] + ") ⭐" + fmt_num(top_en.get('stargazers_count', 0) + ")" if top_en else "- 🔥 Top pick: (none today)"}
+
+---
+
+## 📚 All Resources
+
+| File | Description |
+|------|-------------|
+| [trending_zh.md](./trending_zh.md) | 🇨🇳 CN repos (updated daily) |
+| [trending_en.md](./trending_en.md) | 🌍 EN repos (updated daily) |
+| [books.md](./books.md) | 📚 Recommended books |
+| [communities.md](./communities.md) | 💬 Communities & Forums |
+| [online-labs.md](./online-labs.md) | 🧪 Online labs & Sandboxes |
+
+---
+
+*Updated: {now.strftime('%Y-%m-%d %H:%M')} (Beijing Time)*  \n
+*Maintained by [vinson-lee](https://github.com/vinson-lee01)*
 """
     with open("resources/trending.md", "w", encoding="utf-8") as f:
         f.write(summary)
-    print("  done: trending.md")
+    print("  ✅ Done: resources/trending.md")
+
+    print("\n✅ All done!")
 
 
 if __name__ == "__main__":
