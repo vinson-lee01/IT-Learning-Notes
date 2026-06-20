@@ -1,65 +1,58 @@
 # 05 · Kubernetes Orchestration
 
-> Kubernetes is the operating system of cloud-native infrastructure. Master K8s and you master the universal language of modern ops.
-> This module is the heart of the entire roadmap — spend time here, it directly impacts your salary.
+> K8s is the operating system of cloud native. Master K8s, and you master the universal language of modern infrastructure.
+> This is the most important module — K8s is the core competency for DevOps/SRE roles.
 
 ---
 
 ## 🎯 Learning Objectives
 
-By the end of this module, you should be able to:
+After completing this module, you should be able to:
 
-- [ ] Understand K8s architecture (Control Plane / Node components, etcd, API Server, Scheduler, Controllers)
-- [ ] Confidently work with Pods, Deployments, Services, Ingress
-- [ ] Write and debug YAML manifests fluently
+- [ ] Understand K8s architecture (Control Plane / Data Plane, etcd, API Server, Scheduler, Controllers)
+- [ ] Proficiently operate core resources: Pod / Deployment / Service / Ingress
+- [ ] Write and debug YAML manifests by hand (not generate from code)
 - [ ] Manage config and secrets with ConfigMap / Secret
-- [ ] Use Helm for package management (add repos, install, customize values)
-- [ ] Understand StatefulSet, DaemonSet, Job, CronJob
+- [ ] Master Helm package manager (add repos, install, customize values.yaml)
+- [ ] Understand advanced controllers: StatefulSet / DaemonSet / Job / CronJob
 - [ ] Configure PersistentVolume and PersistentVolumeClaim
 - [ ] Implement service discovery and load balancing
-- [ ] Set up Ingress controllers (Nginx Ingress / Traefik)
+- [ ] Master Ingress controllers (Nginx Ingress / Traefik / Istio)
 - [ ] Understand RBAC authorization
-- [ ] Perform cluster maintenance: upgrades, etcd backup, node management
-- [ ] Troubleshoot: Pod not starting, network issues, storage mount failures
+- [ ] Perform cluster maintenance: upgrades, backup (etcd), node management
+- [ ] Troubleshoot common issues: Pod not starting, network unreachable, storage mount failures
+- [ ] Understand networking: CNI plugins, Service IP, Pod IP, Ingress routing
+- [ ] Configure ResourceQuota and LimitRange
+- [ ] Understand K8s security: Pod Security Standards, Network Policy
 
-**Master this module and you're worth 25K+ RMB (or $50K+ USD).**
+**After this module, you're worth 25K+ CNY / $40K+ USD.**
 
 ---
 
-## 📺 Recommended Video Courses
+## 📺 Recommended Video Tutorials
 
-### English
+| Tutorial | Instructor | Link | Views | Rating |
+|----------|-------------|------|-------|--------|
+| Kubernetes Full Course | TechWorld with Nana | [YouTube](https://www.youtube.com/watch?v=X48VxPB4Pm) | 4M+ | ⭐⭐⭐⭐⭐ |
+| K8s in 3 Hours | TechWorld with Nana | [YouTube](https://www.youtube.com/watch?v=s_o8SX20-Y) | 2M+ | ⭐⭐⭐⭐⭐ |
+| Helm Simplified | Nana | [YouTube](https://www.youtube.com/watch?v=Z60EyhGWJg) | 500K+ | ⭐⭐⭐⭐ |
+| CKA Preparation | Killer Shell | [YouTube](https://www.youtube.com/watch?v=9pUd9Qncao) | 300K+ | ⭐⭐⭐⭐⭐ |
+| Istio Service Mesh | Traefik Labs | [YouTube](https://www.youtube.com/watch?v=rxih-PeBIc) | 100K+ | ⭐⭐⭐⭐ |
 
-| Course | Instructor | Platform | Duration | Rating |
-|--------|-----------|----------|----------|--------|
-| **Kubernetes for Beginners** | TechWorld with Nana | YouTube | 3h | ⭐⭐⭐⭐⭐ |
-| **Kubernetes Full Course** | FreeCodeCamp | YouTube | 8h | ⭐⭐⭐⭐⭐ |
-| **CKA Course** | KillerCoda | Interactive | Self-paced | ⭐⭐⭐⭐⭐ |
-| **Kubernetes Deployment Architectures** | Sander van Vugt | O'Reilly | 6h | ⭐⭐⭐⭐ |
-
-### Chinese (for reference)
-
-| 教程 | 讲师 | 链接 | 播放量 | 推荐度 |
-|------|------|------|--------|---------|
-| K8s 教程由浅入深 | 尚硅谷 | [B站](https://www.bilibili.com/video/BV1Qv41167ck) | 100万+ | ⭐⭐⭐⭐⭐ |
-| K8s 入门到精通 | 黑马程序员 | [B站](https://www.bilibili.com/video/BV1cK4y1L7Tb) | 50万+ | ⭐⭐⭐⭐ |
-| 狂神说 K8s | 狂神 | [B站](https://www.bilibili.com/video/BV1GT4y1A756) | 200万+ | ⭐⭐⭐⭐ |
-
-**Suggested order**: Watch Nana's beginner course first → practice on KillerCoda → read Kubernetes in Action → take CKA exam.
+**Recommended order**: Nana (foundation) → Killer Shell (practice) → Helm (package management)
 
 ---
 
 ## 📖 Recommended Books
 
-| Book | Author | Stage | Comment |
+| Book | Author | Level | Comment |
 |------|--------|-------|---------|
-| **Kubernetes in Action (2nd ed)** | Marko Lukša | Advanced | The best K8s book, period. Must-read. |
-| **Kubernetes: Up and Running (2nd ed)** | Brendan Burns | Advanced | From K8s co-founders, great context. |
-| **The Kubernetes Book** | Nigel Poulton | Intermediate | Thin, clear, great for quick start. |
-| **Kubernetes Patterns** | Bilgin Ibryam | Advanced | Design patterns for K8s apps. |
-| **Managing Kubernetes** | Josh Rosso | Advanced | Operations-focused, troubleshooting. |
-
-**Chinese**: 《Kubernetes 权威指南》+《深入解析 Kubernetes》(张磊) are excellent Chinese references.
+| *Kubernetes in Action (2nd Ed.)* | Marko Lukša | Advanced | Best K8s book, period. |
+| *Kubernetes: Up & Running (3rd Ed.)* | Brendan Burns et al. | Advanced | From K8s co-creator. |
+| *Kubernetes Patterns* | Bilgin Ibryam | Advanced | Design patterns for K8s apps. |
+| *Helm Book* | Matt Butcher et al. | Intermediate | Definitive Helm guide. |
+| *CKA Study Guide* | Benjamin Muschko | Intermediate | Best prep for CKA cert. |
+| *Istio in Action* | Christian Posta | Advanced | Service mesh deep dive. |
 
 ---
 
@@ -67,188 +60,503 @@ By the end of this module, you should be able to:
 
 | Resource | Link | Features |
 |----------|------|----------|
-| **Kubernetes Official Docs** | https://kubernetes.io/docs/ | Authoritative, has Chinese version |
-| **Kubernetes by Example** | https://k8sbyexample.com/ | Quick reference for YAML snippets |
-| **Awesome Kubernetes** | https://github.com/ramitsurana/awesome-kubernetes | Curated list of K8s resources |
-| **KillerCoda K8s Scenarios** | https://killercoda.com/kubernetes | Free interactive K8s labs |
-| **Play with Kubernetes** | https://labs.play-with-k8s.com/ | Free browser-based K8s cluster |
-| **Helm Official Docs** | https://helm.sh/docs/ | Package management |
-| **CNCF Landscape** | https://landscape.cncf.io/ | See the whole ecosystem |
-| **K8s Production Best Practices** | https://learnk8s.io/production-best-practices | Practical production tips |
+| K8s Official Docs | https://kubernetes.io/docs/ | Most authoritative, must-read |
+| K8s Official Docs (CN) | https://kubernetes.io/zh-cn/docs/ | Chinese translation |
+| Kubernetes/minikube | https://github.com/kubernetes/minikube | Local dev environment |
+| helm/helm | https://github.com/helm/helm | Helm official repo |
+| CNCF Landscape | https://landscape.cncf.io/ | All cloud native projects |
+| Play with K8s | https://labs.play-with-k8s.com/ | Online lab platform |
+| K8s The Hard Way | https://github.com/kelseyhightower/kubernetes-the-hard-way | ⭐32k, manual setup from scratch |
+| CNI Comparison | https://www.cni.dev/ | Network plugin selection guide |
+| Istio Docs | https://istio.io/latest/docs/ | Service mesh learning |
+| Awesome Kubernetes | https://github.com/ramitsurana/awesome-kubernetes | ⭐4k, curated list |
 
 ---
 
 ## 📝 Core Knowledge Checklist
 
-### Phase 1: Architecture & Basics (1-2 weeks)
+### Phase 1: K8s Architecture & Basics (1-2 weeks)
 
-- What K8s solves and why it exists
+- What K8s is and what problems it solves (container orchestration, self-healing, autoscaling)
 - Architecture overview:
-  - **Control Plane**: API Server, etcd, Scheduler, Controller Manager
-  - **Node components**: kubelet, kube-proxy, Container Runtime
-- Installation methods: kubeadm vs binary vs managed (EKS/GKE/AKS)
-- Set up local lab with minikube or kind
-- Essential kubectl commands:
+  - **Control Plane**: API Server (gateway), etcd (state store), Scheduler (scheduling), Controller Manager (control loops)
+  - **Data Plane (Worker)**: kubelet (Pod manager), kube-proxy (network proxy), Container Runtime (container runtime)
+- Installation methods:
+  - `kubeadm init`: Official recommendation, suitable for production
+  - Binary deployment: Most educational, but time-consuming
+  - Managed (EKS / GKE / AKS / ACK): Production首选, hassle-free
+  - minikube / kind: Local dev & testing
+- Set up local environment with minikube:
   ```bash
-  kubectl get pods -A
-  kubectl describe pod <name> -n <namespace>
-  kubectl logs <pod-name> -f
-  kubectl exec -it <pod-name> -- /bin/bash
-  kubectl apply -f manifest.yaml
-  kubectl delete -f manifest.yaml
-  kubectl get events --sort-by=.metadata.creationTimestamp
+  minikube start --cpus=4 --memory=8192 --driver=docker
+  kubectl get nodes
+  ```
+- kubectl essential commands:
+  ```bash
+  kubectl get pods -A                                 # View all Pods in all namespaces
+  kubectl get pods -n kube-system                   # View Pods in specific namespace
+  kubectl describe pod <name>                       # View Pod details (critical for debugging)
+  kubectl logs <pod-name>                           # View logs
+  kubectl logs <pod-name> -c <container-name>      # Multi-container Pod: view specific container logs
+  kubectl exec -it <pod-name> -- /bin/bash          # Enter container
+  kubectl apply -f xxx.yaml                        # Declarative deployment
+  kubectl delete -f xxx.yaml                       # Delete resources
+  kubectl edit deployment <name>                   # Edit live resource
+  kubectl scale deployment <name> --replicas=5   # Scale up/down
+  kubectl rollout status deployment <name>          # View rolling update status
+  kubectl rollout undo deployment <name>           # Rollback
+  kubectl port-forward <pod-name> 8080:80         # Port forwarding (debugging magic)
+  kubectl get events --sort-by=.metadata.creationTimestamp  # View cluster events
   ```
 
 ### Phase 2: Core Resource Objects (2-3 weeks)
 
-#### Pod — The smallest deployable unit
-- What a Pod is: one or more containers sharing network/storage
-- Why Pods exist (vs running containers directly)
+#### Pod — K8s smallest scheduling unit
+- Pod definition: one or more containers sharing network/storage
+- Why Pod (vs running container directly): co-scheduling, shared volumes, sidecar pattern
 - Image pull policy: `Always` / `IfNotPresent` / `Never`
 - Restart policy: `Always` / `OnFailure` / `Never`
-- Resource requests vs limits (QoS classes)
-- Health checks: livenessProbe / readinessProbe / startupProbe
-- Init containers
+- Resource constraints: `requests` (scheduling basis) vs `limits` (hard ceiling)
+  ```yaml
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "250m"
+    limits:
+      memory: "128Mi"
+      cpu: "500m"
+  ```
+- Health checks:
+  - `livenessProbe`: Alive probe (restart container on failure)
+  - `readinessProbe`: Ready probe (remove from Service on failure)
+  - `startupProbe`: Startup probe (protect slow-starting apps)
+- InitContainers: Run before main containers, ideal for initialization tasks
 
-#### Deployment — Declarative updates for Pods
-- What Deployments provide: declarative updates, rolling updates, rollbacks
-- Replica management
-- Update strategies: RollingUpdate vs Recreate
-- Rollback: `kubectl rollout undo deployment/<name>`
-- Scaling: `kubectl scale deployment/<name> --replicas=5`
-- Pause and resume rollouts
+#### Deployment — Stateless application deployment
+- Deployment purpose: declarative updates, rolling updates, rollbacks, replica control
+- Replica control (`replicas`)
+- Update strategies:
+  - `RollingUpdate`: Rolling update (default, maxSurge/maxUnavailable control pace)
+  - `Recreate`: Delete then recreate (for legacy apps that can't run in parallel)
+- Rollback operations:
+  ```bash
+  kubectl rollout history deployment <name>     # View revision history
+  kubectl rollout undo deployment <name>      # Rollback to previous version
+  kubectl rollout undo deployment <name> --to-revision=2  # Rollback to specific version
+  ```
+- Pause/resume rolling update:
+  ```bash
+  kubectl rollout pause deployment <name>      # Pause (for debugging)
+  kubectl rollout resume deployment <name>     # Resume
+  ```
 
-#### Service — Stable network endpoint for Pods
-- Why Services exist (Pod IPs are ephemeral)
-- Service types:
-  - `ClusterIP`: internal-only (default)
-  - `NodePort`: exposes on each Node's IP at a static port
-  - `LoadBalancer`: provisions cloud load balancer
+#### Service — Service discovery & load balancing
+- Four Service types:
+  - `ClusterIP`: Default, in-cluster access only
+  - `NodePort`: Each node opens a fixed port
+  - `LoadBalancer`: Cloud provider load balancer
   - `ExternalName`: DNS CNAME mapping
-- Service discovery via DNS
-- Headless Services (`clusterIP: None`) for StatefulSets
+- Service-to-Pod association: via `selector` label matching
+- Headless Service (`clusterIP: None`): for StatefulSet or when direct Pod IP access is needed
+- DNS resolution rule: `<service>.<namespace>.svc.cluster.local`
+
+#### Ingress — HTTP/HTTPS routing
+- Ingress purpose: L7 load balancing, domain-based routing, TLS termination
+- Ingress Controller vs Ingress Resource:
+  - Ingress Controller: The actual reverse proxy doing the work (Nginx/Traefik/Istio)
+  - Ingress Resource: Routing rules definition
+- Nginx Ingress installation:
+  ```bash
+  helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+  helm install ingress-nginx ingress-nginx/ingress-nginx
+  ```
+- Ingress example:
+  ```yaml
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: example-ingress
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /
+  spec:
+    tls:
+    - hosts:
+      - example.com
+      secretName: example-tls
+    rules:
+    - host: example.com
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: web-service
+              port:
+                number: 80
+  ```
 
 #### ConfigMap & Secret — Configuration management
-- Creating ConfigMaps from literals, files, directories
-- Consuming in containers: env vars, envFrom, volume mount
-- Secrets: Opaque, docker-registry, tls
-- Best practice: don't commit Secrets to Git → use Sealed Secrets or Vault
+```yaml
+# ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  database_url: "postgres://db:5432/mydb"
+  log_level: "info"
 
-### Phase 3: Advanced Workloads (2 weeks)
+---
+# Using ConfigMap in Pod
+spec:
+  containers:
+  - name: app
+    env:
+    - name: DATABASE_URL
+      valueFrom:
+        configMapKeyRef:
+          name: app-config
+          key: database_url
+    volumeMounts:
+    - name: config
+      mountPath: /etc/config
+  volumes:
+  - name: config
+    configMap:
+      name: app-config
 
-#### StatefulSet — Stateful applications
-- When to use StatefulSet vs Deployment
-- Stable network identity (Pod hostname persists across reschedules)
-- Ordered deployment and scaling
-- Persistent storage per Pod
-- Example use cases: databases, message queues, clustered apps
-
-#### DaemonSet — One Pod per Node
-- Use cases: log collectors, monitoring agents, networking
-- Updating DaemonSets
-
-#### Job & CronJob — Batch processing
-- Job: one-off task, retry logic
-- CronJob: scheduled tasks, concurrency policies
-- `startingDeadlineSeconds` and why it matters
-
-### Phase 4: Storage (1-2 weeks)
-
-- Container filesystem is ephemeral — why PV/PVC exists
-- PV (PersistentVolume): provisioned manually or dynamically
-- PVC (PersistentVolumeClaim): what the Pod actually requests
-- StorageClasses: dynamic provisioning
-- Access modes: RWO, ROX, RWX
-- Common pitfalls:
-  - PVC not binding (no matching PV or StorageClass)
-  - Pod stuck `Pending` because PVC can't mount
-  - File permissions on mounted volumes
-
-### Phase 5: Ingress & Networking (2 weeks)
-
-- Why Ingress exists (avoid exposing each Service via LoadBalancer)
-- Ingress controllers: Nginx, Traefik, HAProxy, Istio
-- Ingress resource YAML structure
-- Path-based vs host-based routing
-- TLS termination at Ingress
-- NetworkPolicies: control traffic between Pods
-- CNI plugins: Calico, Flannel, Cilium (comparison)
-
-### Phase 6: Helm & Package Management (1 week)
-
-- Why Helm exists (YAML sprawl, no versioning, no rollback)
-- Helm architecture: Chart = package, Release = installed instance
-- Essential commands:
-  ```bash
-  helm repo add bitnami https://charts.bitnami.com/bitnami
-  helm search repo nginx
-  helm install my-nginx bitnami/nginx
-  helm upgrade my-nginx bitnami/nginx --values custom-values.yaml
-  helm rollback my-nginx 1
-  helm uninstall my-nginx
-  ```
-- Creating your own Chart: `helm create my-chart`
-- Template syntax: `{{ .Values.xxx }}`, conditionals, ranges
-- Helm best practices: use existing Charts, don't reinvent
-
-### Phase 7: RBAC & Security (1 week)
-
-- Why RBAC matters (least privilege)
-- Core concepts: User/Group → Role/ClusterRole → RoleBinding/ClusterRoleBinding
-- Default ServiceAccount and why you should't use it for everything
-- Pod Security Standards: Privileged / Baseline / Restricted
-- Network segmentation with NetworkPolicies
-- Secrets encryption at rest (etcd encryption)
-
-### Phase 8: Cluster Administration (ongoing)
-
-- Upgrading control plane nodes (one at a time)
-- Upgrading worker nodes (drain → upgrade → uncordon)
-- etcd backup and restore:
-  ```bash
-  etcdctl snapshot save snapshot.db
-  etcdctl snapshot restore snapshot.db
-  ```
-- Node management: taints, tolerations, node affinity
-- Resource quotas and limit ranges
-- Monitoring cluster health: control plane components
+---
+# Secret (base64-encoded)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+type: Opaque
+data:
+  password: cGFzc3dvcmQxMjM=   # echo -n "password123" | base64
+```
 
 ---
 
-## 🔬 Hands-on Projects
+## 🔧 Hands-On: Deploy a Complete App (Nginx + Redis + Config)
 
-| Project | Difficulty | What you'll learn |
-|---------|-------------|-------------------|
-| **Deploy a 3-tier app** | ⭐⭐ | Deployments, Services, Ingress, PVC |
-| **Set up Nginx Ingress** | ⭐⭐ | Ingress controller installation and configuration |
-| **Helmify an app** | ⭐⭐⭐ | Create a Helm Chart from scratch |
-| **Set up Prometheus monitoring** | ⭐⭐⭐⭐ | K8s monitoring stack |
-| **CKA practice exam** | ⭐⭐⭐⭐ | Exam-style troubleshooting |
-| **Multi-stage deployment** | ⭐⭐⭐⭐⭐ | Staging → production with Helm |
+```yaml
+# 1. ConfigMap (Nginx config)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+data:
+  nginx.conf: |
+    server {
+        listen 80;
+        location / {
+            root /usr/share/nginx/html;
+            index index.html;
+        }
+        location /api {
+            proxy_pass http://redis-service:6379;
+        }
+    }
+
+---
+# 2. Deployment (Nginx)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: conf
+          mountPath: /etc/nginx/conf.d
+        - name: html
+          mountPath: /usr/share/nginx/html
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+      volumes:
+      - name: conf
+        configMap:
+          name: nginx-conf
+      - name: html
+        configMap:
+          name: nginx-html
+
+---
+# 3. Service (Nginx)
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP
+
+---
+# 4. Redis Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        ports:
+        - containerPort: 6379
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        emptyDir: {}
+
+---
+# 5. Redis Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+spec:
+  selector:
+    app: redis
+  ports:
+  - port: 6379
+    targetPort: 6379
+  type: ClusterIP
+```
+
+Apply:
+```bash
+kubectl apply -f nginx-redis.yaml
+kubectl get all
+kubectl port-forward svc/nginx-service 8080:80
+# Visit localhost:8080 in browser
+```
 
 ---
 
-## ⚠️ Common Pitfalls
+## 🚨 Common Troubleshooting Guide
 
-| Pitfall | Why it happens | How to avoid |
-|---------|----------------|---------------|
-| Images pulled from public registries | Rate limits, reliability | Use a private registry or pull-through cache |
-| No resource requests/limits | Node runs out of memory | Always set requests and limits |
-| Using `latest` tag | Can't reproduce or roll back | Pin image tags to specific versions |
-| Storing Secrets in Git | Security breach | Use Sealed Secrets, Vault, or SOPS |
-| Not using health checks | K8s sends traffic to broken Pods | Always configure liveness/readiness probes |
-| One big monolithic manifest | Hard to maintain | Split into separate files, use Kustomize or Helm |
-| Ignoring RBAC | Security risk | Set up proper Roles and RoleBindings |
+### Pod won't start (Pending / CrashLoopBackOff / ImagePullBackOff)
+
+```bash
+# 1. Check Pod status and events
+kubectl describe pod <pod-name> -n <namespace>
+# Focus on Events section
+
+# 2. Common Pending causes
+# - Insufficient resources (nodes have insufficient...)
+# - Node selector mismatch
+# - PVC mount failure
+
+# 3. Common ImagePullBackOff causes
+# - Wrong image name
+# - Private registry without imagePullSecrets
+# - Network unreachable (node can't access registry)
+
+# 4. Check container logs
+kubectl logs <pod-name> -n <namespace>
+kubectl logs <pod-name> -c <container-name> -n <namespace>  # multi-container
+```
+
+### Network unreachable (Service can't reach Pod / Pod can't reach internet)
+
+```bash
+# 1. Check Service Endpoints (MOST IMPORTANT!)
+kubectl get endpoints <service-name> -n <namespace>
+# If Endpoints is empty, Service selector and Pod labels don't match
+
+# 2. Test network from inside a Pod
+kubectl exec -it <pod-name> -- nslookup kubernetes.default.svc.cluster.local
+kubectl exec -it <pod-name> -- ping <service-ip>
+kubectl exec -it <pod-name> -- curl <service-name>:<port>
+
+# 3. Check NetworkPolicy (is traffic blocked?)
+kubectl get networkpolicy -n <namespace>
+
+# 4. Check CNI plugin status
+kubectl get pods -n kube-system | grep -E "calico|flannel|weave|cilium"
+```
+
+### Storage mount failure (PVC Pending)
+
+```bash
+# 1. Check if StorageClass exists
+kubectl get sc
+
+# 2. Check PVC status
+kubectl get pvc -n <namespace>
+# Pending = no available PV or StorageClass misconfigured
+
+# 3. View PVC events
+kubectl describe pvc <pvc-name> -n <namespace>
+```
 
 ---
 
-## ✅ Self-Check: Can you...
+## 🏭 Production Best Practices
 
-- [ ] Explain what happens when you run `kubectl apply -f deployment.yaml`?
-- [ ] Manually debug a Pod that's in `CrashLoopBackOff`?
-- [ ] Set up an Ingress that routes `api.example.com` to one Service and `web.example.com` to another?
-- [ ] Create a Helm Chart with configurable replica count and resource limits?
-- [ ] Back up etcd and restore it on a new cluster?
-- [ ] Explain the difference between a Deployment and a StatefulSet?
+### Resource Quotas & Limits
+```yaml
+# ResourceQuota: namespace-level total resource limits
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-quota
+spec:
+  hard:
+    requests.cpu: "10"
+    requests.memory: 20Gi
+    limits.cpu: "20"
+    limits.memory: 40Gi
+    pods: "50"
+    services: "20"
 
-> 💡 **Next step**: After this module, move on to **08 · CI/CD Pipelines** to learn how to automate deployments to your K8s cluster.
+---
+# LimitRange: default resource limits per container
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: default-limits
+spec:
+  limits:
+  - default:
+      cpu: "500m"
+      memory: "512Mi"
+    defaultRequest:
+      cpu: "100m"
+      memory: "128Mi"
+    type: Container
+```
+
+### Pod Disruption Budget (PDB) — Ensure service availability during rolling updates
+```yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: nginx-pdb
+spec:
+  minAvailable: 2        # Keep at least 2 Pods available
+  selector:
+    matchLabels:
+      app: nginx
+```
+
+### Security Hardening
+```yaml
+# 1. Don't run as root
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  readOnlyRootFilesystem: true
+
+# 2. Network Policy (allow only specific Pods to access)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: api-allow
+spec:
+  podSelector:
+    matchLabels:
+      app: api
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+    - protocol: TCP
+      port: 8080
+```
+
+---
+
+## 🎓 Certification Guide (CKA / CKAD)
+
+| Cert | Focus | Preparation Tips |
+|------|-------|-------------------|
+| CKA (Certified Kubernetes Administrator) | Cluster ops, troubleshooting, networking, storage | Practice `kubectl` speed, hand-write YAML fast |
+| CKAD (Certified Kubernetes Application Developer) | App deployment, ConfigMap/Secret, Ingress, HPA | Practice Helm, label selectors, health checks |
+| CKS (Certified Kubernetes Security Specialist) | Security hardening, network policies, image security | Practice Pod Security Standards, RBAC, Network Policy |
+
+**Prep Resources**:
+- [Killer Shell](https://killer.sh/) — Simulated exam environment (HIGHLY推荐)
+- [CKA Prep Notes](https://github.com/stefanprodan/Kubernetes-CKA) — ⭐14k
+- [CKAD Exercises](https://github.com/dgkanatsio/Kubernetes-CKAD) — ⭐8k
+
+---
+
+## 📊 Advanced Roadmap
+
+```
+K8s Basics
+  └── K8s Networking (CNI, Service, Ingress, Istio)
+        └── K8s Storage (PV/PVC/StorageClass/CSI)
+              └── Helm Package Management
+                    └── GitOps (Argo CD / Flux)
+                          └── Service Mesh (Istio / Linkerd)
+                                └── Observability (Prometheus + Grafana + Jaeger)
+```
+
+**Recommended next module**: [06_CI_CD](../06_CI_CD/) — Learn to automate deployments to K8s with GitHub Actions / GitLab CI.
+
+---
+
+## ✅ Self-Check Quiz
+
+After learning, try to answer these:
+
+- [ ] Explain K8s architecture — what does each component do?
+- [ ] What's the difference between `requests` and `limits`?
+- [ ] How does Deployment rolling update work? How to rollback?
+- [ ] What's the difference between `ClusterIP` / `NodePort` / `LoadBalancer`?
+- [ ] What's the relationship between Ingress and Service?
+- [ ] Difference between `livenessProbe` and `readinessProbe`?
+- [ ] How does PVC binding to PV work?
+- [ ] What's the difference between StatefulSet and Deployment?
+- [ ] What's the relationship between Role / ClusterRole / RoleBinding / ClusterRoleBinding in RBAC?
+- [ ] How do you troubleshoot Pod network connectivity issues?
+
+---
+
+> After this module, go get a CKA certification. Put "Proficient in K8s architecture & operations" on your resume — your salary will jump.
+> Next recommended: [06_CI_CD](../06_CI_CD/) — Automate code deployment to K8s clusters.
