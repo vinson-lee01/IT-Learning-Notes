@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Multi-platform share text generator
+Multi-platform share text generator - Optimized Version
 - Twitter / X
 - Reddit (r/devops, r/sre)
 - Zhihu (知乎)
@@ -9,6 +9,7 @@ Multi-platform share text generator
 - LinkedIn
 - Hacker News
 - Dev.to
+- Improved: better logging, error handling, more platforms
 """
 
 import json
@@ -25,25 +26,37 @@ TRENDING_EN_FILE = "resources/trending_en.md"
 README_FILE = "README.md"
 
 
+def log(msg, level="INFO"):
+    """Print log with timestamp."""
+    timestamp = datetime.now().strftime("%H:%M:%S")
+    prefix = {"INFO": "ℹ️", "WARN": "⚠️", "ERROR": "❌", "SUCCESS": "✅"}[level]
+    print(f"[{timestamp}] {prefix} {msg}", flush=True)
+
+
 def load_cache():
+    """Load cache file."""
     if os.path.exists(CACHE_FILE):
         try:
             with open(CACHE_FILE, "r", encoding="utf-8") as f:
                 return json.load(f)
-        except Exception:
-            pass
+        except Exception as e:
+            log(f"Error loading cache: {e}", "WARN")
     return {}
 
 
 def load_trending():
     """Parse trending files for highlights."""
     result = {"new_zh": 0, "new_en": 0, "top_zh": "", "top_en": "", "top_zh_url": "", "top_en_url": ""}
+    
     for path, key in [(TRENDING_FILE, "zh"), (TRENDING_EN_FILE, "en")]:
         if not os.path.exists(path):
+            log(f"Trending file not found: {path}", "WARN")
             continue
+        
         try:
             with open(path, "r", encoding="utf-8") as f:
                 content = f.read()
+            
             # New count
             m = re.search(r"New today:\s*\*\*(\d+)\*\*", content)
             if m:
@@ -51,6 +64,7 @@ def load_trending():
                     result["new_zh"] = int(m.group(1))
                 else:
                     result["new_en"] = int(m.group(1))
+            
             # Top pick
             m2 = re.search(r"Top pick:\s*\[([^\]]+)\]\(([^\)]+)\)", content)
             if m2:
@@ -60,24 +74,31 @@ def load_trending():
                 else:
                     result["top_en"] = m2.group(1)
                     result["top_en_url"] = m2.group(2)
-        except Exception:
-            pass
+                    
+        except Exception as e:
+            log(f"Error parsing {path}: {e}", "ERROR")
+    
+    log(f"Loaded trending: ZH={result['new_zh']} new, EN={result['new_en']} new", "SUCCESS")
     return result
 
 
 def load_readme_desc():
     """Extract description from README.md."""
     if not os.path.exists(README_FILE):
+        log(f"README not found: {README_FILE}", "WARN")
         return "DevOps/SRE learning roadmap"
+    
     try:
         with open(README_FILE, "r", encoding="utf-8") as f:
             content = f.read()
+        
         lines = [l.strip() for l in content.split("\n") if l.strip()]
         for line in lines:
-            if len(line) > 30 and not line.startswith("#") and not line.startswith("["):
+            if len(line) > 30 and not line.startswith("#") and not line.startswith("[") and not line.startswith("|"):
                 return line[:120]
-    except Exception:
-        pass
+    except Exception as e:
+        log(f"Error reading README: {e}", "ERROR")
+    
     return "DevOps/SRE Zero-to-Hero Learning Roadmap"
 
 
@@ -93,8 +114,11 @@ def generate_twitter(trending):
     lines.append("✅ 12 modules, Zero → Hero")
     lines.append("✅ CN + EN, 500+ curated resources")
     lines.append("✅ Trending repos updated daily")
-    if trending["new_zh"] > 0 or trending["new_en"] > 0:
-        lines.append(f"✅ +{trending['new_zh'] + trending['new_en']} new repos today")
+    
+    total_new = trending["new_zh"] + trending["new_en"]
+    if total_new > 0:
+        lines.append(f"✅ +{total_new} new repos today")
+    
     lines.append("")
     lines.append("#DevOps #SRE #Linux #Docker #Kubernetes #CloudNative #OpenSource")
     lines.append("")
@@ -124,9 +148,11 @@ def generate_reddit(trending):
     lines.append("")
     lines.append("Two versions: Chinese (CN market) + English (global).")
     lines.append("Trending DevOps repos auto-updated daily via GitHub Actions.")
+    
     if trending["top_en"]:
         lines.append("")
         lines.append(f"Today's top pick: [{trending['top_en']}]({trending['top_en_url']})")
+    
     lines.append("")
     lines.append("🔗 https://github.com/vinson-lee01/ops-engineering-roadmap")
     lines.append("")
@@ -163,9 +189,11 @@ def generate_zhihu(trending):
     lines.append("12. 面试题汇总")
     lines.append("")
     lines.append("📦 500+ 精选资源，中英双语，每日更新热门发现。")
+    
     if trending["top_zh"]:
         lines.append("")
         lines.append(f"今日推荐：[{trending['top_zh']}]({trending['top_zh_url']})")
+    
     lines.append("")
     lines.append("🔗 https://github.com/vinson-lee01/ops-engineering-roadmap")
     lines.append("")
@@ -286,16 +314,51 @@ def generate_devto(trending):
     return "\n".join(lines)
 
 
+def generate_wechat(trending):
+    """WeChat (微信公众号) share text."""
+    lines = []
+    lines.append("=" * 50)
+    lines.append("💬 微信公众号")
+    lines.append("=" * 50)
+    lines.append("")
+    lines.append("**标题：** 运维工程师必备：从零到架构师的完整学习路线")
+    lines.append("")
+    lines.append("**正文：**")
+    lines.append("")
+    lines.append("作为一名在运维领域摸爬滚打多年的工程师，我深知知识体系化的重要性。")
+    lines.append("")
+    lines.append("今天分享一份我整理的完整 DevOps/SRE 学习路线：")
+    lines.append("")
+    lines.append("✨ **12 个核心模块**，从 Linux 基础到 SRE 高级实践")
+    lines.append("✨ **500+ 精选资源**，涵盖书籍、视频、在线实验")
+    lines.append("✨ **中英双语版本**，满足不同需求")
+    lines.append("✨ **每日自动更新**，紧跟技术前沿")
+    lines.append("")
+    lines.append("适合：运维新人 | SRE 转岗 | 技术进阶")
+    lines.append("")
+    lines.append("📌 仓库地址：https://github.com/vinson-lee01/ops-engineering-roadmap")
+    lines.append("")
+    lines.append("如果觉得有用，欢迎 Star ⭐ 支持！")
+    lines.append("")
+    return "\n".join(lines)
+
+
 def main():
+    """Main function."""
+    log("🚀 Starting share text generation...")
+    start_time = time.time()
+    
     cache = load_cache()
     trending = load_trending()
     desc = load_readme_desc()
-
+    
+    log(f"Description: {desc[:50]}...", "INFO")
+    
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(f"# 📢 Share Text Generator — {TODAY}\n\n")
         f.write(f"> {desc}\n\n")
         f.write("-" * 50 + "\n\n")
-
+        
         f.write(generate_twitter(trending))
         f.write("\n\n")
         f.write(generate_reddit(trending))
@@ -309,10 +372,14 @@ def main():
         f.write(generate_hackernews(trending))
         f.write("\n\n")
         f.write(generate_devto(trending))
-
-    print(f"✅ Done: {OUTPUT_FILE}")
-    print(f"   Trending: ZH={trending['new_zh']} new, EN={trending['new_en']} new")
+        f.write("\n\n")
+        f.write(generate_wechat(trending))
+    
+    elapsed = time.time() - start_time
+    log(f"✅ Done: {OUTPUT_FILE} (elapsed: {elapsed:.1f}s)", "SUCCESS")
+    log(f"   Trending: ZH={trending['new_zh']} new, EN={trending['new_en']} new", "INFO")
 
 
 if __name__ == "__main__":
+    import time
     main()
