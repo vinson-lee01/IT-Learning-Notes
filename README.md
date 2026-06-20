@@ -14,6 +14,7 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/vinson-lee01/ops-engineering-roadmap?style=social)](https://github.com/vinson-lee01/ops-engineering-roadmap/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/vinson-lee01/ops-engineering-roadmap?style=social)](https://github.com/vinson-lee01/ops-engineering-roadmap/network/members)
+[![License](https://img.shields.io/badge/license-CC%20BY--SA%204.0-green?style=flat&logo=creative-commons&logoColor=white)](https://creativecommons.org/licenses/by-sa/4.0/)
 
 </div>
 
@@ -30,56 +31,64 @@
 
 ---
 
-## 关于这个仓库
+## 这个仓库能帮你什么
 
-我是 vinson-lee，一名云运维从业者。
+不管是刚入行想系统学，还是做了几年想往架构师方向走，这份路线图把运维/DevOps/SRE 全栈路径拆成了四个阶段，每个阶段都有明确目标。
 
-过去几年，从管几台物理机开始，一路做到几百台集群、容器化、K8s、CI/CD 全链路。踩过的坑太多，积累的笔记也不少。
+资料不是网上随便扒的——中文部分侧重国内大厂实战（阿里云/腾讯云），英文部分对接 Google SRE / AWS 官方文档，两边各自独立，按需取用。
 
-这个仓库把我工作中学过、用过的好东西整理了出来，做成一份从零基础到架构师的学习路线图。每一份资料我都自己翻过一遍。
+每日会自动抓取 GitHub 上最新涌现的高质量运维相关开源项目，不需要自己去找。
 
-有国内最接地气的 B 站教程、中文文档，也有国外一线 SRE 团队的实战手册。中英文各自独立，根据你的情况挑着看就好。
+> 💡 **适合谁**：运维工程师 / DevOps / SRE / 云架构师 / 应届求职 / 转行自学
+>
+> 📌 **Star 收藏一下**，每次更新你都能看到，也不用下次再找。
 
-### 📊 仓库数据
+---
+
+## 📊 仓库数据
 
 | 指标 | 说明 |
 |------|------|
 | **学习方向** | 12 大模块（中文） + 12 大模块（英文），覆盖运维全栈 |
 | **资源数量** | 500+ 精选资源（教程、工具、书籍、社区） |
-| **更新频率** | 每日更新 GitHub 热门发现 |
-| **适用人群** | 运维工程师 / DevOps / SRE / 云架构师 / 转行自学 |
-
-> 更多工作笔记见我的 CSDN 博客：[云域A](https://jiubana1.blog.csdn.net/)
+| **更新频率** | 每日自动更新 GitHub 热门发现 |
+| **中英对照** | 同一知识点提供中英文两份资料，按需选择 |
+| **适用人群** | 零基础入门 → 架构师进阶 |
 
 ---
 
 ## 🗺️ 学习路线图
 
-这份路线图是我根据真实运维晋升路径整理的。每个阶段都有明确的目标和产出。
+按真实运维晋升路径整理，每个阶段有明确的产出目标。
 
 ### 🏁 第一阶段：入门（第1-2月）
 
 > Linux 基础 → Shell 脚本 → 计算机网络 → Git 版本控制
 >
-> **目标**：能独立管理 20 台服务器，写自动化脚本
+> **阶段目标**：能独立管理 20 台服务器，写自动化脚本，不靠百度解决基础问题
 
 ### 🚀 第二阶段：进阶（第3-6月）
 
-> Docker 容器 → Nginx/Tomcat → MySQL/Redis → Zabbix
+> Docker 容器 → Nginx/Tomcat → MySQL/Redis → Zabbix 监控
 >
-> **目标**：能搭建完整的 Web 服务栈，处理常见故障
+> **阶段目标**：能搭建完整的 Web 服务栈，处理常见故障，有备份恢复意识
 
 ### 🔥 第三阶段：高级（第7-12月）
 
 > Kubernetes → CI/CD → Prometheus+Grafana → Terraform
 >
-> **目标**：能设计高可用架构，主导容器化改造
+> **阶段目标**：能设计高可用架构，主导容器化改造，有成本意识
 
 ### ☁️ 第四阶段：专家（第13-24月）
 
 > Service Mesh → Multi-Cluster → FinOps → SRE 实践
 >
-> **目标**：能带团队，制定运维规范，把控系统稳定性
+> **阶段目标**：能带团队，制定运维规范，把控系统稳定性，参与架构决策
+
+---
+
+> 🌟 **觉得这份路线图有用？点个 Star ⭐ 让更多人看到，也方便你下次回来找。**
+> [![GitHub stars](https://img.shields.io/github/stars/vinson-lee01/ops-engineering-roadmap?style=social)](https://github.com/vinson-lee01/ops-engineering-roadmap/stargazers)
 
 ---
 
@@ -143,11 +152,11 @@
 
 ---
 
-## ⭐ 我筛选的必学资源
+## ⭐ 精选必学资源
 
-以下是我从几百个资源里筛出来的精华，每个都亲自翻过。按「必看程度」排序。
+以下是从几百个资源里筛出来的精华，每个都亲自翻过。按「必看程度」排序。
 
-### 🇨🇳 中文 5 个必看
+### 🇨🇳 中文 Top 5
 
 | # | 资源 | Star | 简介 |
 |---|------|------|------|
@@ -238,22 +247,22 @@
 
 ## 📝 关于
 
-有计划持续更新。GitHub 热门仓库我会定期浏览，把有价值的加到[实时发现](./resources/trending.md)页面。
-
-发现链接挂了或者有好的资源推荐，直接提 Issue 或 PR，我会及时处理。
-
 内容基于 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) 共享，转载请注明出处。
+
+更多工作笔记见 CSDN 博客：[云域A](https://jiubana1.blog.csdn.net/)
+
+发现链接挂了或者有好的资源推荐，直接提 Issue 或 PR。
 
 ---
 
 <p align="center">
-  <sub>vinson-lee（云域A）· 专注云运维，输出真实工作案例</sub>
+  <sub>Maintained by <a href="https://github.com/vinson-lee01">vinson-lee</a> · 专注云运维，输出真实工作案例</sub>
 </p>
 
 ---
 
 > 如果这个仓库对你有帮助，欢迎 Star ⭐ — 这样每次更新你都能看到，也能让更多人发现这份路线。
->
+> 
 > 有好的资源推荐？直接提 Issue 或 PR，一起把它做得更好。
 
 <p align="center">
