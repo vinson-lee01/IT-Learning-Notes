@@ -13,19 +13,19 @@
 <br>
 
 [![🇨🇳 中文版](https://img.shields.io/badge/%F0%9F%87%A8%F0%9F%87%B3_%E4%B8%AD%E6%96%87%E7%89%88-%E8%BF%9B%E5%85%A5%E4%B8%AD%E6%96%87%E7%89%88-blue?style=for-the-badge)](./CN_Ops_Roadmap/)
-[![🌍 English](https://img.shields.io/badge/F0%9F%8C%8D_English-Enter_EN_Version-orange?style=for-the-badge)](./EN_Global_SRE/)
+[![🌍 English](https://img.shields.io/badge/%F0%9F%8C%8D_English-Enter_EN_Version-orange?style=for-the-badge)](./EN_Global_SRE/)
 
 </div>
 
 ---
 
-## 📖 关于本路线图 · About This Roadmap
+## 📖 About This Roadmap · 关于本路线图
 
 ### 🇨🇳 中文简介
 
 市面上大多数运维学习路线存在同一个问题：**只列工具名，不讲顺序、不讲深度、不讲在生产环境中怎么串联使用。**
 
-这份路线图不一样。它基于国内云厂商和大型互联网公司的实际运维经验编写，围绕三个递进阶段展开，**每个模块都标注了真实生产环境需要掌握的深度——不是教材目录。**
+这份路线图不一样。它基于国内云厂商和大型互联网公司的实际运维经验编写，围绕三个递进阶段展开。**每个模块都标注了真实生产环境需要掌握的深度——不是教材目录。**
 
 ### 🌍 English Introduction
 
@@ -33,21 +33,18 @@ Most online learning paths for operations engineers share a common problem: **th
 
 This roadmap is built differently — from hands-on experience at cloud vendors and large-scale internet companies, structured around three progressive stages. **Every module explicitly marks the depth needed in real work**, not a textbook table of contents.
 
-<div align="center">
-
 ```
-         Stage 1                    Stage 2                   Stage 3
-┌─────────────────────┐   ┌─────────────────────┐   ┌─────────────────────┐
-│   Can work          │   │   Can design        │   │   Can define        │
-│   independently     │──▶│   architecture       │──▶│   team standards    │
-└─────────────────────┘   └─────────────────────┘   └─────────────────────┘
+┌────────────────────┐      ┌────────────────────┐      ┌────────────────────┐
+│     Stage 1        │      │     Stage 2        │      │     Stage 3        │
+│                    │      │                    │      │                    │
+│   Can work         │ ──▶  │   Can design        │ ──▶  │   Can define        │
+│   independently    │      │   architecture      │      │   team standards    │
+└────────────────────┘      └────────────────────┘      └────────────────────┘
 ```
-
-</div>
 
 | | |
 |:--|:--|
-| **Language / 语言** | CN & EN maintained independently · 非机器翻译 · not machine-translated |
+| **Language / 语言** | CN & EN maintained independently · 非机器翻译 · Not machine-translated |
 | **Content / 内容** | 15KB+ production notes per module · 每模块 15KB+ 生产实战笔记 |
 | **CN Focus / 中文侧重** | Aliyun / Tencent Cloud / 等保合规 Compliance / 基线扫描 Baseline / 国产化 Localization |
 | **EN Focus / 英文侧重** | AWS / GCP / SRE Book methodology / Global best practices |
@@ -56,31 +53,14 @@ This roadmap is built differently — from hands-on experience at cloud vendors 
 
 ## 🗺️ Learning Path Overview · 学习路径总览
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                          Learning Timeline                           │
-│                                                                     │
-│  Month 1-3 (Foundation)          Month 4-9 (Growth)                 │
-│  ┌──────────────────┐            ┌────────────────────────────────┐│
-│  │ · Linux Basics    │           │ · Docker / K8s                   ││
-│  │ · Shell Scripting │──────────▶│ · CI/CD Pipeline                 ││
-│  │ · Networking      │           │ · Prometheus + Grafana           ││
-│  │ · Nginx Deploy    │           │ · ELK Stack                      ││
-│  └──────────────────┘           └────────────────────────────────┘│
-│                                           │                         │
-│                                           ▼                         │
-│                                Month 10-18 (Advanced)                 │
-│                                ┌────────────────────────────────┐   │
-│                                │ · Architecture Design           │   │
-│                                │ · SLO / Error Budget System      │   │
-│                                │ · Multi-cloud / FinOps           │   │
-│                                │ · Service Mesh / Chaos Eng.      │   │
-│                                └────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────────┘
-```
+| **Phase 1 : Foundation (Month 1~3)** | **Phase 2 : Growth (Month 4~9)** | **Phase 3 : Advanced (Month 10~18+)** |
+|:---|:---|:---|
+| `Linux Basics` — 系统管理 / 权限 / 内核调优 / systemd | `Docker & K8s` — 容器化 / 编排 / Service Mesh | `Architecture` — 架构设计 / 多云 / FinOps |
+| `Shell Scripting` — Bash / 文本处理 / 自动化脚本 | `CI/CD Pipeline` — 流水线 / 制品管理 / 安全门禁 | `SLO & Error Budget` — 可用性目标 / 错误预算体系 |
+| `Networking` — TCP/IP / DNS / iptables / 抓包分析 | `Prometheus + Grafana` — 指标设计 / 告警规则 / 仪表盘 | `Multi-cloud` — 混合云架构 / 成本优化 |
+| `Nginx Deploy` — 反向代理 / 负载均衡 / HTTPS 调优 | `ELK Stack` — 日志采集 / 分析 / 可视化 | `Chaos Engineering` — 故障演练 / 弹性验证 |
 
 > Each stage concludes with verifiable deliverables — not *studied*, but *can build*.
->
 > 每个阶段都有可验证的产出 —— 不是"学过了"，而是"能做出来"。
 
 ---
@@ -96,9 +76,9 @@ This roadmap is built differently — from hands-on experience at cloud vendors 
 <table>
 <tr>
 <td width="50"><strong>#</strong></td>
-<td width="220"><strong>模块</strong></td>
+<td width="210"><strong>模块</strong></td>
 <td><strong>核心内容</strong></td>
-<td width="260"><strong>学习产出</strong></td>
+<td width="250"><strong>学习产出</strong></td>
 </tr>
 <tr><td align="center"><code>01</code></td><td><a href="./CN_Ops_Roadmap/01_Linux_Basics/"><b>Linux 基础</b></a></td><td>系统管理 · 文件权限 · 进程管理 · 内核调优 · systemd</td><td>独立管理 50+ 台服务器日常运维</td></tr>
 <tr><td align="center"><code>02</code></td><td><a href="./CN_Ops_Roadmap/02_Shell_Scripting/"><b>Shell 编程</b></a></td><td>Bash 编程 · awk/sed/grep · crontab 自动化 · 脚本健壮性</td><td>生产级自动化脚本（日志轮转/备份/告警）</td></tr>
