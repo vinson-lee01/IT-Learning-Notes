@@ -149,6 +149,7 @@ def get_badge(r):
     topics = r.get("topics", [])
     desc = (r.get("description") or "").lower()
     full_name = r.get("full_name", "").lower()
+    name = r.get("name", "").lower()
     if "awesome" in topics or "awesome" in full_name or "curated" in desc:
         return "collection"
     if "tutorial" in topics or "tutorial" in full_name or "learn" in desc:
@@ -245,7 +246,7 @@ def render_md(new_repos, must_see, all_repos, cache, lang="zh", searches=None):
     total_seen = len(cache.get("seen", {}))
 
     lines = []
-    lines.append(f"# {'????????' if is_zh else '🌍 International'} Trending Repos\n")
+    lines.append(f"# {'🇨🇳' if is_zh else '🌍'} Trending Repos\n")
     lines.append(f"> Updated: {now.strftime('%Y-%m-%d %H:%M')} (Beijing Time)\n")
     lines.append(f"> 🆕 New today: **{len(new_repos)}** | 📦 Total tracked: **{total_seen}** | 🔥 Hot: **{len(must_see)}**\n")
     lines.append("\n---\n")
@@ -334,51 +335,54 @@ def main():
     print(f"  ✅ Done: {out_en} ({len(new_en)} new, {len(cache_en.get('seen', {}))} total)")
     save_cache(CACHE_FILE_EN, cache_en)
 
-    # Index file
-    print("\n�索引...")
+    # Index file — build with lines list to avoid f-string syntax errors
+    print("\n📊 Index...")
     now = datetime.now(timezone(timedelta(hours=8)))
-    top_zh = new_zh[0] if new_zh else None
-    top_en = new_en[0] if new_en else None
 
-    summary = f"""# 📊 Resources Index
+    idx_lines = []
+    idx_lines.append("# 📊 Resources Index\n\n")
+    idx_lines.append(f"> 🕐 Updated: {now.strftime('%Y-%m-%d %H:%M')} (Beijing Time)\n\n")
+    idx_lines.append("---\n\n")
 
-> 🕐 Updated: {now.strftime('%Y-%m-%d %H:%M')} (Beijing Time)
+    # CN section
+    idx_lines.append("## 🇨🇳 Chinese Community (CN)\n\n")
+    idx_lines.append("- 📄 [Full list](./trending_zh.md)\n")
+    idx_lines.append(f"- 🆕 New today: **{len(new_zh)}**\n")
+    if new_zh:
+        top = new_zh[0]
+        stars_str = fmt_num(top.get("stargazers_count", 0) or 0)
+        idx_lines.append(f"- 🔥 Top pick: [{top['full_name']}]({top['html_url']}) ⭐{stars_str}\n")
+    else:
+        idx_lines.append("- 🔥 Top pick: (none today)\n")
+    idx_lines.append("\n---\n\n")
 
----
+    # EN section
+    idx_lines.append("## 🌍 International (EN)\n\n")
+    idx_lines.append("- 📄 [Full list](./trending_en.md)\n")
+    idx_lines.append(f"- 🆕 New today: **{len(new_en)}**\n")
+    if new_en:
+        top = new_en[0]
+        stars_str = fmt_num(top.get("stargazers_count", 0) or 0)
+        idx_lines.append(f"- 🔥 Top pick: [{top['full_name']}]({top['html_url']}) ⭐{stars_str}\n")
+    else:
+        idx_lines.append("- 🔥 Top pick: (none today)\n")
+    idx_lines.append("\n---\n\n")
 
-## 🇨🇳 Chinese Community (CN)
+    # All resources table
+    idx_lines.append("## 📚 All Resources\n\n")
+    idx_lines.append("| File | Description |\n")
+    idx_lines.append("|------|-------------|\n")
+    idx_lines.append("| [trending_zh.md](./trending_zh.md) | 🇨🇳 CN repos (updated daily) |\n")
+    idx_lines.append("| [trending_en.md](./trending_en.md) | 🌍 EN repos (updated daily) |\n")
+    idx_lines.append("| [books.md](./books.md) | 📚 Recommended books |\n")
+    idx_lines.append("| [communities.md](./communities.md) | 💬 Communities & Forums |\n")
+    idx_lines.append("| [online-labs.md](./online-labs.md) | 🧪 Online labs & Sandboxes |\n")
+    idx_lines.append("\n---\n\n")
+    idx_lines.append(f"*Updated: {now.strftime('%Y-%m-%d %H:%M')} (Beijing Time)*  \n")
+    idx_lines.append("*Maintained by [vinson-lee](https://github.com/vinson-lee01)*\n")
 
-- 📄 [Full list](./trending_zh.md)
-- 🆕 New today: **{len(new_zh)}**
-{"- 🔥 Top pick: [" + top_zh['full_name'] + "](" + top_zh['html_url'] + ") ⭐" + fmt_num(top_zh.get('stargazers_count', 0) + ")" if top_zh else "- 🔥 Top pick: (none today)"}
-
----
-
-## 🌍 International (EN)
-
-- 📄 [Full list](./trending_en.md)
-- 🆕 New today: **{len(new_en)}**
-{"- 🔥 Top pick: [" + top_en['full_name'] + "](" + top_en['html_url'] + ") ⭐" + fmt_num(top_en.get('stargazers_count', 0) + ")" if top_en else "- 🔥 Top pick: (none today)"}
-
----
-
-## 📚 All Resources
-
-| File | Description |
-|------|-------------|
-| [trending_zh.md](./trending_zh.md) | 🇨🇳 CN repos (updated daily) |
-| [trending_en.md](./trending_en.md) | 🌍 EN repos (updated daily) |
-| [books.md](./books.md) | 📚 Recommended books |
-| [communities.md](./communities.md) | 💬 Communities & Forums |
-| [online-labs.md](./online-labs.md) | 🧪 Online labs & Sandboxes |
-
----
-
-*Updated: {now.strftime('%Y-%m-%d %H:%M')} (Beijing Time)*  \n
-*Maintained by [vinson-lee](https://github.com/vinson-lee01)*
-"""
     with open("resources/trending.md", "w", encoding="utf-8") as f:
-        f.write(summary)
+        f.write("".join(idx_lines))
     print("  ✅ Done: resources/trending.md")
 
     print("\n✅ All done!")
