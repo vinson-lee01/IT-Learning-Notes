@@ -1,6 +1,6 @@
 # 📊 Resources Index
 
-> 🕐 Updated: 2026-06-22 13:04 (Beijing Time)
+> 🕐 Updated: 2026-06-23 12:03 (Beijing Time)
 
 ---
 
@@ -15,8 +15,8 @@
 ## 🌍 International (EN)
 
 - 📄 [Full list](./trending_en.md)
-- 🆕 New today: **0**
-- 🔥 Top pick: (none today)
+- 🆕 New today: **1**
+- 🔥 Top pick: [Saurabhkr952/dev-portfolio](https://github.com/Saurabhkr952/dev-portfolio) ⭐141
 
 ---
 
@@ -32,5 +32,5 @@
 
 ---
 
-*Updated: 2026-06-22 13:04 (Beijing Time)*  
+*Updated: 2026-06-23 12:03 (Beijing Time)*  
 *Maintained by [vinson-lee](https://github.com/vinson-lee01)*

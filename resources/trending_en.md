@@ -1,6 +1,6 @@
 # 🌍 Trending Repos
-> Updated: 2026-06-22 13:04 (Beijing Time)
-> 🆕 New today: **0** | 📦 Total tracked: **145** | 🔥 Hot: **51**
+> Updated: 2026-06-23 12:03 (Beijing Time)
+> 🆕 New today: **1** | 📦 Total tracked: **146** | 🔥 Hot: **51**
 
 ---
 
@@ -18,7 +18,16 @@
 
 
 ## 🆕 Newly Discovered
-> No new repos today. Check back tomorrow!
+| Repo | ⭐ Stars | 🍴 Forks | Level | Why recommended |
+|------|---------|----------|-------|----------|
+| [Saurabhkr952/dev-portfolio](https://github.com/Saurabhkr952/dev-portfolio) | 141 | 32 | Intermediate | Implementing End-to-End CI/CD, IaC, and Monitoring using Kubernetes, GitOps (Arg |
+
+---
+
+## 📂 By Category
+
+### CI/CD (1 new)
+- **[Saurabhkr952/dev-portfolio](https://github.com/Saurabhkr952/dev-portfolio)** ⭐141 — Implementing End-to-End CI/CD, IaC, and Monitoring using Kubernetes, GitOps (Argo CD), GitHub Action
 
 ---
 
@@ -36,5 +45,5 @@
 
 ---
 
-*Updated: 2026-06-22 13:04 (Beijing Time)*  
+*Updated: 2026-06-23 12:03 (Beijing Time)*  
 *Maintained by [vinson-lee](https://github.com/vinson-lee01)*
