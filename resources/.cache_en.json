@@ -146,7 +146,8 @@
     "AceInterviews/google-sre-interview-handbook": "2026-06-20T10:12:48.303770+00:00",
     "Harikishanth/Incident-Triage-Environment": "2026-06-20T10:12:48.303775+00:00",
     "Saurabhkr952/dev-portfolio": "2026-06-23T04:03:43.832684+00:00",
-    "prometheus/prom-client": "2026-06-24T04:06:24.936975+00:00"
+    "prometheus/prom-client": "2026-06-24T04:06:24.936975+00:00",
+    "prometheus/client_js": "2026-06-25T04:06:39.292400+00:00"
   },
   "star_history": {
     "trimstray/the-book-of-secret-knowledge": 229279,
@@ -295,7 +296,8 @@
     "AceInterviews/google-sre-interview-handbook": 59,
     "Harikishanth/Incident-Triage-Environment": 52,
     "Saurabhkr952/dev-portfolio": 141,
-    "prometheus/prom-client": 3470
+    "prometheus/prom-client": 3470,
+    "prometheus/client_js": 3471
   },
-  "updated": "2026-06-24T04:06:34.558830+00:00"
+  "updated": "2026-06-25T04:06:48.420202+00:00"
 }

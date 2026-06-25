@@ -1,6 +1,6 @@
 # 🌍 Trending Repos
-> Updated: 2026-06-24 12:06 (Beijing Time)
-> 🆕 New today: **1** | 📦 Total tracked: **147** | 🔥 Hot: **51**
+> Updated: 2026-06-25 12:06 (Beijing Time)
+> 🆕 New today: **1** | 📦 Total tracked: **148** | 🔥 Hot: **51**
 
 ---
 
@@ -20,14 +20,14 @@
 ## 🆕 Newly Discovered
 | Repo | ⭐ Stars | 🍴 Forks | Level | Why recommended |
 |------|---------|----------|-------|----------|
-| [prometheus/prom-client](https://github.com/prometheus/prom-client) | 3.5k | 399 | Advanced | Core monitoring component |
+| [prometheus/client_js](https://github.com/prometheus/client_js) | 3.5k | 400 | Advanced | Core monitoring component |
 
 ---
 
 ## 📂 By Category
 
 ### Monitoring (1 new)
-- **[prometheus/prom-client](https://github.com/prometheus/prom-client)** ⭐3.5k — Prometheus client for node.js
+- **[prometheus/client_js](https://github.com/prometheus/client_js)** ⭐3.5k — Prometheus client for node.js
 
 ---
 
@@ -45,5 +45,5 @@
 
 ---
 
-*Updated: 2026-06-24 12:06 (Beijing Time)*  
+*Updated: 2026-06-25 12:06 (Beijing Time)*  
 *Maintained by [vinson-lee](https://github.com/vinson-lee01)*
