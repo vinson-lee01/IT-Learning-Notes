@@ -1,5 +1,5 @@
 # 🇨🇳 Trending Repos
-> Updated: 2026-06-30 12:08 (Beijing Time)
+> Updated: 2026-07-01 12:24 (Beijing Time)
 > 🆕 New today: **0** | 📦 Total tracked: **145** | 🔥 Hot: **33**
 
 ---
@@ -14,7 +14,7 @@
 | [grafana/grafana](https://github.com/grafana/grafana) | 7.5w | 1.4w | Advanced | 生产监控核心组件 |
 | [binhnguyennus/awesome-scalability](https://github.com/binhnguyennus/awesome-scalability) | 7.2w | 7.0k | Advanced | 精选资源合集 |
 | [nektos/act](https://github.com/nektos/act) | 7.1w | 2.0k | Advanced | Run your GitHub Actions locally 🚀 |
-| [go-gitea/gitea](https://github.com/go-gitea/gitea) | 5.7w | 6.8k | Advanced | Git with a cup of tea! Painless self-hosted all-in-one software development serv |
+| [go-gitea/gitea](https://github.com/go-gitea/gitea) | 5.7w | 6.9k | Advanced | Git with a cup of tea! Painless self-hosted all-in-one software development serv |
 
 
 ## 🆕 Newly Discovered
@@ -36,5 +36,5 @@
 
 ---
 
-*Updated: 2026-06-30 12:08 (Beijing Time)*  
+*Updated: 2026-07-01 12:24 (Beijing Time)*  
 *Maintained by [vinson-lee](https://github.com/vinson-lee01)*
